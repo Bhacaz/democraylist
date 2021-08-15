@@ -16,6 +16,8 @@ function onPush(event) {
         self.registration.showNotification(desc['title'], options),
     )
 }
+
+self.addEventListener('fetch',() => {});
 self.addEventListener("push", onPush);
 self.addEventListener('notificationclick', (event) => {
     if (clients.openWindow && event.notification.data.url) {
