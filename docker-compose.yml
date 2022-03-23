@@ -1,0 +1,35 @@
+version: '3.4'
+
+volumes:
+  db_data:
+  gem_cache:
+  node_modules:
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - gem_cache:/usr/local/bundle/gems
+      - node_modules:/app/node_modules
+    env_file: .env
+    environment:
+      RAILS_ENV: production
+  postgres:
+    image: postgres:9.6.23-alpine
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:5.0.14-alpine
+    ports:
+      - "6379:6379"
