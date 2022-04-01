@@ -34,7 +34,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.menuItems = [
-      {label: 'Logout', icon: 'fa fa-sign-out', command: this.logoutEvent}
+      {label: 'Logout', icon: 'fa-solid fa-sign-out', command: this.logoutEvent}
     ];
   }
 

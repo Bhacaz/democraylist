@@ -11,13 +11,13 @@
   <div class="playlist-data">
     <p class="no-margin">{{playlist.created_by.display_name || playlist.created_by.spotify_id}}<br>
       {{playlist.tracks_count}}
-      <i class="fa fa-music"></i>
+      <i class="fa-solid fa-music"></i>
       {{playlist.subscribers}}
-      <i class="fa fa-user-o"></i>
+      <i class="fa-solid fa-user-o"></i>
     </p>
   </div>
   <div class="dot-menu">
-    <i class="fa fa-ellipsis-v menu-show-button" (click)="sheetComponent.toggle()"></i>
+    <i class="fa-solid fa-ellipsis-v menu-show-button" (click)="sheetComponent.toggle()"></i>
     <app-bottom-sheet #sheetComponent [title]="playlist.name" [menuItems]="menuItems"></app-bottom-sheet>
   </div>
 </div>

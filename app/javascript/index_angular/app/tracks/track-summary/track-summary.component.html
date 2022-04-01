@@ -1,7 +1,7 @@
 
 <div class="container track-summary" [ngClass]="{'focus-background' : focus}">
   <div class="album-img-container" (mouseenter)="mouseEnterPlayButton()" (mouseleave)="mouseLeavePlayButton()">
-    <i class="fa fa-play-circle-o play-button"
+    <i class="fa-solid fa-play-circle-o play-button"
        (click)="playPreview()"
     [ngClass]="{'hidden' : !showPlayButton}"></i>
     <img [src]="track.album.images[2].url"
@@ -15,7 +15,7 @@
     <span *ngIf="showVotebutton" class="icon vote-null arrow-up"
           [ngClass]="{'voted-up' : track.my_vote == 'up', 'arrow-hover' : track.my_vote != 'up'}"
           (click)="upVote()">
-      <i class="fa fa-chevron-up"></i>
+      <i class="fa-solid fa-chevron-up"></i>
     </span>
 
       <div class="vote-count">{{track.vote_count}}</div>
@@ -23,7 +23,7 @@
       <span *ngIf="showVotebutton" class="icon vote-null arrow-down"
             [ngClass]="{'voted-down' : track.my_vote == 'down', 'arrow-hover' : track.my_vote != 'down'}"
             (click)="downVote()">
-      <i class="fa fa-chevron-down"></i>
+      <i class="fa-solid fa-chevron-down"></i>
     </span>
     </div>
   </div>
@@ -34,7 +34,7 @@
       <p class="no-margin track-artists">{{track.artistNames}}</p>
     </span>
     <div *ngIf="!track.playlist_id" class="release-date">
-      <span><i class="fa fa-calendar"></i></span>
+      <span><i class="fa-solid fa-calendar"></i></span>
       {{releaseDate}}
     </div>
     <p *ngIf="track.added_by" class="added-by">{{track.added_by.name || track.added_by.spotify_id}}</p>
@@ -42,18 +42,18 @@
   <div *ngIf="!track.playlist_id" class="content-center">
     <button pButton
             class="p-button-success green-button content-center-content"
-            icon="fa fa-plus"
+            icon="fa-solid fa-plus"
             [disabled]="track.disableAddButton"
             (click)="trackChangeTrigger()">
     </button>
   </div>
   <div class="menu-container">
-    <i class="fa fa-ellipsis-v menu-show-button" (click)="sheetComponent.toggle()"></i>
+    <i class="fa-solid fa-ellipsis-v menu-show-button" (click)="sheetComponent.toggle()"></i>
     <app-bottom-sheet #sheetComponent [title]="track.name" [menuItems]="menuItems"></app-bottom-sheet>
   </div>
 </div>
 
-<p-dialog *ngIf="track.playlist_id && showInfo" header="{{track.name}}" [(visible)]="showInfo">
+<p-dialog *ngIf="track.playlist_id && showInfo" header="{{track.name}}" [(visible)]="showInfo" [dismissableMask]="true">
   <span class="bold">Added by:</span> {{track.added_by.name || track.added_by.spotify_id}}<br>
   <span class="bold">Up vote:</span> {{track.up_vote_count}}<br>
   <span class="bold">Down vote:</span> {{track.down_vote_count}}<br>

@@ -4,7 +4,6 @@ import {PlaylistChangeService} from '../../democraylist/playlist-change.service'
 import {AudioService} from '../audio-player.service';
 import {MenuItem} from 'primeng/api';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Location} from '@angular/common';
 import templateString from './track-summary.component.html'
 import stylesString from './track-summary.component.scss'
 
@@ -55,11 +54,11 @@ export class TrackSummaryComponent implements OnInit, OnDestroy, OnChanges {
       this.showPlayButton = this.currentlyPlaying;
     });
     this.menuItems = [
-      {label: 'Open on spotify', icon: 'fa fa-spotify', command: this.openWithSpotify},
-      {label: 'Show info', icon: 'fa fa-info-circle', command: this.toggleShowInfo}
+      {label: 'Open on spotify', icon: 'fa-brands fa-spotify', command: this.openWithSpotify},
+      {label: 'Show info', icon: 'fa-solid fa-info-circle', command: this.toggleShowInfo}
     ];
     if (this.playlist && this.playlist.user_id === this.userLocalStorage.id) {
-      this.menuItems.push({label: 'Remove', icon: 'fa fa-minus-circle', command: this.removeTrack});
+      this.menuItems.push({label: 'Remove', icon: 'fa-solid fa-minus-circle', command: this.removeTrack});
     }
     this.setAddButtonDisabled();
     this.focus = this.track.id === this.trackId;

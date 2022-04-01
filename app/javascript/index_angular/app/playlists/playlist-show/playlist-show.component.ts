@@ -43,7 +43,7 @@ export class PlaylistShowComponent implements OnInit, OnDestroy {
     this.voteChangingSubscription = this.voteService.voteChanging().subscribe(playlistId => this.getPlaylist());
 
     this.playMenuItem = [
-      {label: 'Loading...', icon: 'fa fa-spinner'}];
+      {label: 'Loading...', icon: 'fa-solid fa-spinner'}];
   }
 
   ngOnInit(): void {
@@ -85,16 +85,16 @@ export class PlaylistShowComponent implements OnInit, OnDestroy {
 
   showMenu(menu) {
     this.menuItems = [
-      {label: 'Open on spotify', icon: 'fa fa-spotify', command: this.openWithSpotify},
-      {label: 'Statistic', icon: 'fa fa-bar-chart', command: this.openStats}
+      {label: 'Open on spotify', icon: 'fa-brands fa-spotify', command: this.openWithSpotify},
+      {label: 'Statistic', icon: 'fa-solid fa-bar-chart', command: this.openStats}
     ];
 
     if (this.owner) {
-      this.menuItems.push({label: 'Edit', icon: 'fa fa-pencil', command: this.redirectToEdit});
+      this.menuItems.push({label: 'Edit', icon: 'fa-solid fa-pencil', command: this.redirectToEdit});
     }
 
     if (this.owner || this.playlist.subscribed) {
-      this.menuItems.push({label: 'Share playlist', icon: 'fa fa-share-alt', command: this.copyShareLink});
+      this.menuItems.push({label: 'Share playlist', icon: 'fa-solid fa-share-alt', command: this.copyShareLink});
     }
     menu.toggle();
   }
@@ -162,11 +162,11 @@ export class PlaylistShowComponent implements OnInit, OnDestroy {
         }
 
         this.playMenuItem = [
-          {label: 'Tracks', icon: 'fa fa-music', command: this.playTracks, disabled: noDevice},
-          {label: 'Submission', icon: 'fa fa-headphones', command: this.playSubmissions, disabled: noDevice},
-          {label: 'Unvoted', icon: 'fa fa-question-circle', command: this.playUnvoted, disabled: noDevice},
-          {label: 'Up voted', icon: 'fa fa-arrow-up', command: this.playUpVoted, disabled: noDevice},
-          {label: 'Down voted', icon: 'fa fa-arrow-down', command: this.playDownVoted, disabled: noDevice}
+          {label: 'Tracks', icon: 'fa-solid fa-music', command: this.playTracks, disabled: noDevice},
+          {label: 'Submission', icon: 'fa-solid fa-headphones', command: this.playSubmissions, disabled: noDevice},
+          {label: 'Unvoted', icon: 'fa-solid fa-question-circle', command: this.playUnvoted, disabled: noDevice},
+          {label: 'Up voted', icon: 'fa-solid fa-arrow-up', command: this.playUpVoted, disabled: noDevice},
+          {label: 'Down voted', icon: 'fa-solid fa-arrow-down', command: this.playDownVoted, disabled: noDevice}
         ];
       }
     );
