@@ -48,7 +48,9 @@
     </button>
   </div>
   <div class="menu-container">
-    <i class="fa-solid fa-ellipsis-v menu-show-button" (click)="sheetComponent.toggle()"></i>
+    <span (click)="sheetComponent.toggle()">
+      <i class="fa-solid fa-ellipsis-v menu-show-button"></i>
+    </span>
     <app-bottom-sheet #sheetComponent [title]="track.name" [menuItems]="menuItems"></app-bottom-sheet>
   </div>
 </div>

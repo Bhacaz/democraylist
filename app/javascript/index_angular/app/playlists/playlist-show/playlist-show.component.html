@@ -1,6 +1,8 @@
 <app-back-toolbar [redirectPath]="'/'">
   <div class="dot-menu content-center-content">
-    <i class="fa-solid fa-ellipsis-v menu-show-button" (click)="showMenu(sheetComponent)"></i>
+    <span (click)="showMenu(sheetComponent)">
+      <i class="fa-solid fa-ellipsis-v menu-show-button"></i>
+    </span>
     <app-bottom-sheet #sheetComponent [title]="playlist?.name" [menuItems]="menuItems"></app-bottom-sheet>
   </div>
 </app-back-toolbar>
