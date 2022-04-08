@@ -14,12 +14,8 @@
  *= require_self
  */
 
-//$fa-font-path: "font-awesome/fonts";
-$fa-font-path: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts';
-@import "font-awesome/scss/font-awesome";
-//@import "~primeicons/primeicons.css";
-@import "primeng/resources/themes/nova/theme";
-@import "primeng/resources/primeng.min";
+@import "primeng/resources/themes/nova/theme.css";
+@import "primeng/resources/primeng.min.css";
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
