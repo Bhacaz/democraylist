@@ -11,7 +11,12 @@ default: &default
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  adapter: postgresql
+  database: democraylist_production
+  timeout: 5000
+  username: postgres
+  password: password
+  host: postgres
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -25,3 +30,6 @@ production:
   adapter: postgresql
   database: democraylist_production
   timeout: 5000
+  username: postgres
+  password: password
+  host: postgres
