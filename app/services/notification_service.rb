@@ -31,7 +31,7 @@ class NotificationService
   end
 
   def self.build_new_track_message(track)
-    badge = ENV['democraylist_fe_host'] + '/icons/icon-512x512-white.png'
+    badge = ENV['democraylist_host'] + '/icons/icon-512x512-white.png'
     icon = RSpotify::Track.find(track.spotify_id).album.images.last['url']
     user_name = track.user.name
     rspotify_track = RSpotify::Track.find(track.spotify_id)
@@ -40,7 +40,7 @@ class NotificationService
     body = "#{rspotify_track.name} - #{rspotify_track.artists.map(&:name).join(', ')}\nAdded by #{user_name}"
 
     # Link to song in playlist
-    url = ENV['democraylist_fe_host'] + "/playlists/#{track.playlist_id}?track_id=#{track.id}"
+    url = ENV['democraylist_host'] + "/playlists/#{track.playlist_id}?track_id=#{track.id}"
     {
       notification: {
         icon: icon,
@@ -54,11 +54,11 @@ class NotificationService
   end
 
   def self.build_new_feature_message(body)
-    badge = ENV['democraylist_fe_host'] + '/icons/icon-512x512-white.png'
+    badge = ENV['democraylist_host'] + '/icons/icon-512x512-white.png'
     title = "Democraylist - NEW FEATURES!"
 
     # Link to song in playlist
-    url = ENV['democraylist_fe_host']
+    url = ENV['democraylist_host']
     {
       notification: {
         badge: badge,
