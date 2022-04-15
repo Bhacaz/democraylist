@@ -29,7 +29,7 @@ class AuthController < ApplicationApiController
     body = {
       grant_type: 'authorization_code',
       code: params[:code],
-      redirect_uri: ENV['democraylist_fe_host'] + '/auth/spotify/callback',
+      redirect_uri: ENV['democraylist_host'] + '/auth/spotify/callback',
       client_id: ENV['spotify_client_id'],
       client_secret: ENV['spotify_client_secret']
     }
