@@ -46,9 +46,9 @@
 <span *ngIf="playlist">
   <div class="container tracks-tabs">
     <app-tabs class="content-center-content">
-      <app-tab [tabTitle]="'Submissions'">
+      <app-tab [tabTitle]="'Unvoted'">
        <div class="track-list">
-            <div *ngFor="let track of playlist.tracks_submission">
+            <div *ngFor="let track of playlist.tracks_unvoted">
               <app-track-summary [track]="track" [playlist]="playlist"></app-track-summary>
             </div>
           </div>
