@@ -39,8 +39,8 @@ class PlaylistSerializer
     end
   end
 
-  attribute :tracks_submission do |object, params|
-    tracks = object.submission_tracks(params[:auth_user_id])
+  attribute :tracks_unvoted do |object, params|
+    tracks = object.unvoted_tracks(params[:auth_user_id])
     next [] if tracks.empty?
 
     tracks_data = RSpotify::Track.find(tracks.map(&:spotify_id)).index_by(&:id)
@@ -49,8 +49,8 @@ class PlaylistSerializer
     end
   end
 
-  attribute :tracks_submission_count do |object, params|
-    object.submission_tracks(params[:auth_user_id]).size
+  attribute :tracks_unvoted_count do |object, params|
+    object.unvoted_tracks(params[:auth_user_id]).size
   end
 
   attribute :tracks_archived do |object, params|

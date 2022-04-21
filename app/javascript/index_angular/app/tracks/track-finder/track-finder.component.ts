@@ -37,7 +37,7 @@ export class TrackFinderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.playlist.tracks.map(track => this.trackIdsInPlaylist.push(track.spotify_id));
-    this.playlist.tracks_submission.map(track => this.trackIdsInPlaylist.push(track.spotify_id));
+    this.playlist.tracks_unvoted.map(track => this.trackIdsInPlaylist.push(track.spotify_id));
     this.playlist.tracks_archived.map(track => this.trackIdsInPlaylist.push(track.spotify_id));
   }
 

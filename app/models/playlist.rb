@@ -30,12 +30,16 @@ class Playlist < ApplicationRecord
   end
 
   def submission_tracks(auth_user_id)
-    real_track_ids = real_tracks.map(&:id)
+    real_track_ids = real_tracks.map(&:id).to_set
     preload_tracks.to_a.select do |track|
       next false if real_track_ids.include? track.id
 
       track.votes.to_a.none? { |vote| vote.user_id == auth_user_id }
     end
+  end
+
+  def unvoted_tracks(auth_user_id)
+    tracks.where.not(id: Vote.where(track_id: tracks.select(:id), user_id: auth_user_id).select(:track_id))
   end
 
   def image_url

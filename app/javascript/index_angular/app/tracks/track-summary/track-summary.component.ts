@@ -153,7 +153,7 @@ export class TrackSummaryComponent implements OnInit, OnDestroy, OnChanges {
   setAddButtonDisabled() {
     if (this.playlist) {
       this.playlist.tracks.map(track => this.trackIdsInPlaylist.push(track.spotify_id));
-      this.playlist.tracks_submission.map(track => this.trackIdsInPlaylist.push(track.spotify_id));
+      this.playlist.tracks_unvoted.map(track => this.trackIdsInPlaylist.push(track.spotify_id));
       this.playlist.tracks_archived.map(track => this.trackIdsInPlaylist.push(track.spotify_id));
       this.track.disableAddButton = this.trackIdsInPlaylist.indexOf(this.track.id) > -1;
     }
