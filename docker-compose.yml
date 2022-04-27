@@ -2,6 +2,7 @@ version: '3.4'
 
 volumes:
   db_data:
+  gem_cache:
 
 services:
   app:
@@ -13,8 +14,11 @@ services:
       - "3000:3000"
     volumes:
       - .:/app
+      - gem_cache:/bundle
     environment:
       RAILS_ENV: development
+      BUNDLE_PATH: /bundle/vendor
+      REDIS_URL: redis://redis:6379/0
   postgres:
     image: postgres:14.2-alpine
     volumes:

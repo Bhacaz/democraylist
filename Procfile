@@ -1,3 +1,2 @@
-release: bundle exec rails db:migrate
-web: bin/rails server -p ${PORT:-5000} -e $RAILS_ENV
+web: bin/rails server -b 0.0.0.0 -p 3000
 worker: bundle exec sidekiq -c 2
