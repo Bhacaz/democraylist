@@ -6,7 +6,6 @@ volumes:
 services:
   app:
     build: .
-    command: bundle exec rails db:migrate
     depends_on:
       - postgres
       - redis
