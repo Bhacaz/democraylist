@@ -12,19 +12,19 @@
 
   <div class="arrows content-center">
     <div *ngIf="track.playlist_id"  class="container column content-center-content">
-    <span *ngIf="showVotebutton" class="icon vote-null arrow-up"
-          [ngClass]="{'voted-up' : track.my_vote == 'up', 'arrow-hover' : track.my_vote != 'up'}"
-          (click)="upVote()">
-      <i class="fa-solid fa-chevron-up"></i>
-    </span>
+      <span *ngIf="showVotebutton" class="icon vote-null arrow-up umami--click--up-vote"
+            [ngClass]="{'voted-up' : track.my_vote == 'up', 'arrow-hover' : track.my_vote != 'up'}"
+            (click)="upVote()">
+        <i class="fa-solid fa-chevron-up"></i>
+      </span>
 
-      <div class="vote-count">{{track.vote_count}}</div>
+        <div class="vote-count">{{track.vote_count}}</div>
 
-      <span *ngIf="showVotebutton" class="icon vote-null arrow-down"
-            [ngClass]="{'voted-down' : track.my_vote == 'down', 'arrow-hover' : track.my_vote != 'down'}"
-            (click)="downVote()">
-      <i class="fa-solid fa-chevron-down"></i>
-    </span>
+        <span *ngIf="showVotebutton" class="icon vote-null arrow-down umami--click--down-vote"
+              [ngClass]="{'voted-down' : track.my_vote == 'down', 'arrow-hover' : track.my_vote != 'down'}"
+              (click)="downVote()">
+        <i class="fa-solid fa-chevron-down"></i>
+      </span>
     </div>
   </div>
 
@@ -41,10 +41,10 @@
   </div>
   <div *ngIf="!track.playlist_id" class="content-center">
     <button pButton
-            class="p-button-success green-button content-center-content"
+            class="p-button-success green-button content-center-content umami--click--add-track"
             icon="fa-solid fa-plus"
             [disabled]="track.disableAddButton"
-            (click)="trackChangeTrigger()">
+            (click)="addTrackToPlaylist()">
     </button>
   </div>
   <div class="menu-container">
