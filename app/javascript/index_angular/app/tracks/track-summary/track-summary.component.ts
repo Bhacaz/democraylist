@@ -120,7 +120,7 @@ export class TrackSummaryComponent implements OnInit, OnDestroy, OnChanges {
     this.audioService.play(this.track.id, this.track.preview_url);
   }
 
-  trackChangeTrigger() {
+  addTrackToPlaylist() {
     this.democraylistService.addTrackToPlaylist(this.playlist.id, this.track.id).subscribe(data => {
       this.router.navigate(['playlists', this.playlist.id]);
     });

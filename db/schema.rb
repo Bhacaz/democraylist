@@ -11,9 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2020_06_05_010919) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "join_playlist_invites", force: :cascade do |t|
     t.integer "invited_by_id"
     t.integer "user_id"
