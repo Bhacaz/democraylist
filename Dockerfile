@@ -8,7 +8,11 @@ COPY yarn.lock /app/
 
 WORKDIR /app
 
+ENV RAILS_ENV=production
+ENV NODE_ENV=production
+
 RUN gem install foreman
+RUN bundle config set --local without 'development test'
 RUN bundle check || bundle install
 RUN yarn install --check-files
 
@@ -19,6 +23,7 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
 RUN bundle exec rake assets:precompile
+RUN rm -fr node_modules tmp/cache
 
 # Configure the main process to run when running the image
 CMD foreman start
