@@ -1,4 +1,4 @@
-FROM ruby:3.0.2-alpine
+FROM ruby:3.0.4-alpine
 RUN apk --no-cache --update add build-base nodejs tzdata postgresql-dev yarn
 
 COPY Gemfile /app/
