@@ -22,7 +22,8 @@ COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
-RUN bundle exec rake assets:precompile
+# set dummy SECRET_KEY_BASE
+RUN SECRET_KEY_BASE=1 bundle exec rake assets:precompile
 RUN rm -fr node_modules tmp/cache
 
 # Configure the main process to run when running the image
