@@ -26,5 +26,6 @@ ENTRYPOINT ["entrypoint.sh"]
 RUN SECRET_KEY_BASE=1 bundle exec rake assets:precompile
 RUN rm -fr node_modules tmp/cache
 
+CMD bundle exec rails db:migrate
 # Configure the main process to run when running the image
 CMD foreman start
