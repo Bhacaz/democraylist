@@ -40,3 +40,4 @@ yarn-debug.log*
 .idea
 dump.rdb
 *.DS_Store
+.env
