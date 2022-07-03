@@ -3,7 +3,6 @@ class Playlist < ApplicationRecord
   enum share_setting: [:visible, :with_link, :restricted]
 
   validates :name, presence: true
-  validates :user_id, presence: true
   has_many :tracks, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
 
@@ -15,7 +14,12 @@ class Playlist < ApplicationRecord
     @real_tracks ||= begin
       positive_tracks = preload_tracks.to_a
       positive_tracks.select! { |track| track.vote_score > 0 }
-      positive_tracks.sort_by! { |track| [-track.vote_score, track.votes.max_by(&:updated_at)&.updated_at&.to_i || 1] }
+      # 1. Look for must upvote
+      # 2. Tie breaker: look for must downvote
+      # 3. Tie breaker: most recent out is out
+      positive_tracks.sort_by! do |track|
+        [-track.vote_score, track.down_counts, track.votes.max_by(&:updated_at)&.updated_at&.to_i || 1]
+      end
       positive_tracks.first(song_size)
     end
   end
