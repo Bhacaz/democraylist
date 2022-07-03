@@ -10,7 +10,7 @@ class Track < ApplicationRecord
   after_commit :send_notification, on: :create
 
   def vote_score
-   votes.to_a.count(&:up?)
+    votes.to_a.count(&:up?)
   end
 
   def down_counts

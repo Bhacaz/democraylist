@@ -1,7 +1,7 @@
 class PlaylistSerializer
   include BrightSerializer::Serializer
 
-  attributes *Playlist.attribute_names.map(&:to_sym)
+  attributes(*Playlist.attribute_names.map(&:to_sym))
 
   attribute :image_url
 

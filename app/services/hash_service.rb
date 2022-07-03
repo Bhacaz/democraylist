@@ -1,6 +1,5 @@
 class HashService
   class << self
-
     # def inv_mod(num, mod)
     #     res = nil
     #     (0..mod).each do |step|
@@ -11,11 +10,11 @@ class HashService
     #   end
 
     def hash(id)
-      (id * 10000000 % 123456789).to_s(16)
+      (id * 10_000_000 % 123_456_789).to_s(16)
     end
 
     def un_hash(id)
-      (id.to_i(16) * 1356679 % 123456789)
+      (id.to_i(16) * 1_356_679 % 123_456_789)
     end
   end
 end

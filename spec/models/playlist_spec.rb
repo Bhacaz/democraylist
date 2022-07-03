@@ -1,7 +1,7 @@
-
 describe Playlist do
   describe 'validations' do
-    subject {build_stubbed :playlist}
+    subject { build_stubbed :playlist }
+
     it { is_expected.to be_valid }
   end
 
@@ -16,7 +16,7 @@ describe Playlist do
     #      and the track index 3 is out, even track index 2 have
     #      a more recent vote (updated_at most recent)
 
-    let(:playlist) {create :playlist, song_size: 3, user: user}
+    let(:playlist) { create :playlist, song_size: 3, user: user }
     let(:tracks) { create_list :track, 4, playlist: playlist, user: user }
     let(:user) { create :user }
 
@@ -27,9 +27,9 @@ describe Playlist do
 
       create :vote, track: tracks[2], vote: :down, user: user, updated_at: 1.minute.ago
       create :vote, track: tracks[2], vote: :up, updated_at: 1.minute.ago
-      create :vote, track: tracks[3], vote: :up, user: user, updated_at: 3.minute.ago
-      create :vote, track: tracks[3], vote: :down, updated_at: 3.minute.ago
-      create :vote, track: tracks[3], vote: :down, updated_at: 3.minute.ago
+      create :vote, track: tracks[3], vote: :up, user: user, updated_at: 3.minutes.ago
+      create :vote, track: tracks[3], vote: :down, updated_at: 3.minutes.ago
+      create :vote, track: tracks[3], vote: :down, updated_at: 3.minutes.ago
     end
 
     it 'returns the tracks in the playlist' do

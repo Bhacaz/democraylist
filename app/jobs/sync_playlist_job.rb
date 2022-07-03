@@ -1,4 +1,3 @@
-
 class SyncPlaylistJob < ApplicationJob
   queue_as :default
   retry_on Exception, attempts: 3

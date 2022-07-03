@@ -1,7 +1,7 @@
 class TrackSerializer
   include BrightSerializer::Serializer
 
-  attributes *Track.attribute_names.map(&:to_sym)
+  attributes(*Track.attribute_names.map(&:to_sym))
 
   attribute :vote_count do |object|
     object.vote_score
@@ -23,7 +23,7 @@ class TrackSerializer
     {
       id: object.user.id,
       name: object.user.name,
-      spotify_id: object.user.spotify_id,
+      spotify_id: object.user.spotify_id
     }
   end
 end

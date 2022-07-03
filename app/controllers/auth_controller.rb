@@ -1,8 +1,7 @@
 require 'httparty'
 
 class AuthController < ApplicationApiController
-
-  skip_before_action :authenticate_request, except: [:user, :refresh_access_token]
+  skip_before_action :authenticate_request, except: %i[user refresh_access_token]
 
   def login; end
 
@@ -16,9 +15,9 @@ class AuthController < ApplicationApiController
   def spotify_login_url
     query_params = {
       response_type: 'code',
-      client_id: ENV['spotify_client_id'],
+      client_id: ENV.fetch('spotify_client_id', nil),
       scope: 'user-read-email playlist-read-private playlist-read-collaborative playlist-modify-private playlist-modify-public user-read-playback-state user-modify-playback-state user-read-recently-played',
-      redirect_uri: "#{request.protocol}#{request.host_with_port}/auth/spotify/callback",
+      redirect_uri: "#{request.protocol}#{request.host_with_port}/auth/spotify/callback"
     }
 
     render json: { url: 'https://accounts.spotify.com/authorize?' + query_params.to_query }
@@ -29,15 +28,15 @@ class AuthController < ApplicationApiController
     body = {
       grant_type: 'authorization_code',
       code: params[:code],
-      redirect_uri: ENV['democraylist_host'] + '/auth/spotify/callback',
-      client_id: ENV['spotify_client_id'],
-      client_secret: ENV['spotify_client_secret']
+      redirect_uri: ENV.fetch('democraylist_host', nil) + '/auth/spotify/callback',
+      client_id: ENV.fetch('spotify_client_id', nil),
+      client_secret: ENV.fetch('spotify_client_secret', nil)
     }
 
     response = ::HTTParty.post(
       'https://accounts.spotify.com/api/token',
       headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
-      :body => body.to_query
+      body: body.to_query
     )
 
     access_token = response['access_token']
@@ -78,7 +77,8 @@ class AuthController < ApplicationApiController
 
   def refresh_access_token
     access_token = RSpotify::User.send(:refresh_token, auth_user.rspotify_user.id)
-    User.find_by!(spotify_id: auth_user.spotify_id).update!(access_token: access_token, expires_at: (Time.now + 1.hour).to_i)
+    User.find_by!(spotify_id: auth_user.spotify_id).update!(access_token: access_token,
+                                                            expires_at: (Time.now + 1.hour).to_i)
 
     render json: { access_token: access_token }
   end

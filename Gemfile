@@ -30,15 +30,19 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.4'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen'
   gem 'active_record_query_trace'
+  gem 'listen'
   gem 'rack-mini-profiler'
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
+  gem 'web-console', '>= 3.3.0'
 end
 
 group :production do
@@ -46,19 +50,19 @@ group :production do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem 'rspotify'
-gem "figaro"
-gem 'rack-cors', :require => 'rack/cors'
-gem 'httparty', require: false
 gem 'bright_serializer'
+gem 'figaro'
+gem 'hashie'
+gem 'httparty', require: false
+gem 'rack-cors', require: 'rack/cors'
+gem 'rspotify'
 gem 'sidekiq'
 gem 'webpush'
-gem 'hashie'
 
 group :test do
-  gem "rspec-rails"
-  gem "factory_bot_rails"
+  gem 'factory_bot_rails'
   gem 'faker'
+  gem 'rspec-rails'
 end
