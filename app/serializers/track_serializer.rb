@@ -5,7 +5,7 @@ class TrackSerializer
 
   attributes(*Track.attribute_names.map(&:to_sym))
 
-  attribute :vote_count do |object|
+  attribute :vote_count do |object| # rubocop:disable Style/SymbolProc
     object.vote_score
   end
 

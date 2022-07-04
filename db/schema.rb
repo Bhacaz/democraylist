@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2020_06_05_010919) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_04_000629) do
   create_table "join_playlist_invites", force: :cascade do |t|
     t.integer "invited_by_id"
     t.integer "user_id"
@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2020_06_05_010919) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["added_by_id"], name: "index_tracks_on_added_by_id"
-    t.index ["playlist_id"], name: "index_tracks_on_playlist_id"
+    t.index ["playlist_id", "spotify_id"], name: "index_tracks_on_playlist_id_and_spotify_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -69,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2020_06_05_010919) do
     t.string "access_token"
     t.integer "expires_at"
     t.string "refresh_token"
+    t.index ["spotify_id"], name: "index_users_on_spotify_id", unique: true
   end
 
   create_table "votes", force: :cascade do |t|
@@ -78,7 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2020_06_05_010919) do
     t.integer "vote"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["track_id"], name: "index_votes_on_track_id"
+    t.index ["track_id", "user_id"], name: "index_votes_on_track_id_and_user_id", unique: true
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
