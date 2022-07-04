@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 module RSpotify
   module TrackExtension
@@ -12,7 +13,9 @@ module RSpotify
           ids.each_slice(50) do |slice_ids|
             tracks_to_cache.concat(super(slice_ids, market: market))
           end
-          tracks_to_write_multi = tracks_to_cache.each_with_object({}) { |track, hash| hash["rspotify:track:#{track.id}"] = track }
+          tracks_to_write_multi = tracks_to_cache.index_by do |track|
+            "rspotify:track:#{track.id}"
+          end
           Rails.cache.write_multi(tracks_to_write_multi, expires_in: 1.day)
         end
 

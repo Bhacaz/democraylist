@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class Vote < ApplicationRecord
   belongs_to :user
   belongs_to :track
 
-  enum vote: [:up, :down]
+  enum vote: { up: 0, down: 1 }
 
   validates :user_id, uniqueness: { scope: :track_id }
 

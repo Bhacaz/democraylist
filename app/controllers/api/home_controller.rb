@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   class HomeController < ApplicationApiController
     def index
@@ -5,7 +7,7 @@ module Api
       my_playlist_ids = Playlist.where(user_id: auth_user.id).ids
 
       query = Playlist.where(id: playlist_subscrib_ids.concat(my_playlist_ids))
-              .includes(:tracks)
+                      .includes(:tracks)
 
       query = query.where('name LIKE ?', "%#{params[:q]}%") if params[:q]
       query = query.sort_by do |playlist|

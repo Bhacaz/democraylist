@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Playlist < ApplicationRecord
   belongs_to :user
-  enum share_setting: [:visible, :with_link, :restricted]
+  enum share_setting: { visible: 0, with_link: 1, restricted: 2 }
 
   validates :name, presence: true
   has_many :tracks, dependent: :destroy
@@ -13,7 +15,7 @@ class Playlist < ApplicationRecord
   def real_tracks
     @real_tracks ||= begin
       positive_tracks = preload_tracks.to_a
-      positive_tracks.select! { |track| track.vote_score > 0 }
+      positive_tracks.select! { |track| track.vote_score.positive? }
       # 1. Look for must upvote
       # 2. Tie breaker: look for must downvote
       # 3. Tie breaker: most recent out is out
@@ -25,12 +27,12 @@ class Playlist < ApplicationRecord
   end
 
   def archived_tracks(auth_user_id)
-     real_track_ids = real_tracks.map(&:id)
-     preload_tracks.to_a.select do |track|
-       next false if real_track_ids.include? track.id
+    real_track_ids = real_tracks.map(&:id)
+    preload_tracks.to_a.select do |track|
+      next false if real_track_ids.include? track.id
 
-       track.votes.to_a.any? { |vote| vote.user_id == auth_user_id }
-     end
+      track.votes.to_a.any? { |vote| vote.user_id == auth_user_id }
+    end
   end
 
   def submission_tracks(auth_user_id)
@@ -50,9 +52,9 @@ class Playlist < ApplicationRecord
     return unless spotify_id
 
     Rails.cache.fetch("playlist-image_#{spotify_id}", expires_in: 5.minutes) do
-      RSpotify::Playlist.find_by_id(spotify_id).images.first&.fetch('url')
+      RSpotify::Playlist.find_by(id: spotify_id).images.first&.fetch('url')
     end
-  rescue
+  rescue StandardError
     update! spotify_id: nil
     nil
   end

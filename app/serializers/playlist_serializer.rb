@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class PlaylistSerializer
   include BrightSerializer::Serializer
 
-  attributes *Playlist.attribute_names.map(&:to_sym)
+  attributes(*Playlist.attribute_names.map(&:to_sym))
 
   attribute :image_url
 
@@ -40,7 +42,7 @@ class PlaylistSerializer
   end
 
   attribute :tracks_unvoted do |object, params|
-    tracks = object.unvoted_tracks(params[:auth_user_id])
+    tracks = object.unvoted_tracks(params[:auth_user_id]).includes(:user, :votes)
     next [] if tracks.empty?
 
     tracks_data = RSpotify::Track.find(tracks.map(&:spotify_id)).index_by(&:id)

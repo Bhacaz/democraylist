@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SendNotifJob < ApplicationJob
   def perform(notif_data, user_id)
     User.find(user_id).push_notif_preferences.each do |push_notif_preference|

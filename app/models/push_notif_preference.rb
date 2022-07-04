@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PushNotifPreference < ApplicationRecord
   belongs_to :user
 

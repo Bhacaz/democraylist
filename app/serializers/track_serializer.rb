@@ -1,18 +1,18 @@
+# frozen_string_literal: true
+
 class TrackSerializer
   include BrightSerializer::Serializer
 
-  attributes *Track.attribute_names.map(&:to_sym)
+  attributes(*Track.attribute_names.map(&:to_sym))
 
-  attribute :vote_count do |object|
-    object.vote_score
-  end
+  attribute :vote_count, &:vote_score
 
   attribute :up_vote_count do |object|
-    object.votes.count { |vote| vote.up? }
+    object.votes.count(&:up?)
   end
 
   attribute :down_vote_count do |object|
-    object.votes.count { |vote| vote.down? }
+    object.votes.count(&:down?)
   end
 
   attribute :my_vote do |object, params|
@@ -23,7 +23,7 @@ class TrackSerializer
     {
       id: object.user.id,
       name: object.user.name,
-      spotify_id: object.user.spotify_id,
+      spotify_id: object.user.spotify_id
     }
   end
 end
