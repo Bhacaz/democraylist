@@ -52,7 +52,7 @@ class Playlist < ApplicationRecord
     return unless spotify_id
 
     Rails.cache.fetch("playlist-image_#{spotify_id}", expires_in: 5.minutes) do
-      RSpotify::Playlist.find_by(id: spotify_id).images.first&.fetch('url')
+      RSpotify::Playlist.find_by_id(spotify_id).images.first&.fetch('url') # rubocop:disable Rails/DynamicFindBy
     end
   rescue StandardError
     update! spotify_id: nil
