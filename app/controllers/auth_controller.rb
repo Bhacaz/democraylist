@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'httparty'
 
 class AuthController < ApplicationApiController
@@ -20,7 +22,7 @@ class AuthController < ApplicationApiController
       redirect_uri: "#{request.protocol}#{request.host_with_port}/auth/spotify/callback"
     }
 
-    render json: { url: 'https://accounts.spotify.com/authorize?' + query_params.to_query }
+    render json: { url: "https://accounts.spotify.com/authorize?#{query_params.to_query}" }
   end
 
   def spotify_auth_callback
@@ -28,7 +30,7 @@ class AuthController < ApplicationApiController
     body = {
       grant_type: 'authorization_code',
       code: params[:code],
-      redirect_uri: ENV.fetch('democraylist_host', nil) + '/auth/spotify/callback',
+      redirect_uri: "#{ENV.fetch('democraylist_host', nil)}/auth/spotify/callback",
       client_id: ENV.fetch('spotify_client_id', nil),
       client_secret: ENV.fetch('spotify_client_secret', nil)
     }
@@ -78,7 +80,7 @@ class AuthController < ApplicationApiController
   def refresh_access_token
     access_token = RSpotify::User.send(:refresh_token, auth_user.rspotify_user.id)
     User.find_by!(spotify_id: auth_user.spotify_id).update!(access_token: access_token,
-                                                            expires_at: (Time.now + 1.hour).to_i)
+                                                            expires_at: 1.hour.from_now.to_i)
 
     render json: { access_token: access_token }
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def spotify_user
     @spotify_user ||= RSpotify::User.find(auth_user.spotify_id)

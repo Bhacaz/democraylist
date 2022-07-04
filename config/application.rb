@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails'
@@ -39,9 +41,7 @@ module Democraylist
       end
     end
 
-    config.action_dispatch.rescue_responses.merge!(
-      'AuthorizationException' => :unauthorized
-    )
+    config.action_dispatch.rescue_responses['AuthorizationException'] = :unauthorized
     config.active_job.queue_adapter = :sidekiq
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotificationService
   def self.broadcast_added_track(track)
     user_ids = track.playlist.subscriptions.map(&:user_id) << track.playlist.user_id
@@ -30,7 +32,7 @@ class NotificationService
   end
 
   def self.build_new_track_message(track)
-    badge = ENV.fetch('democraylist_host', nil) + '/icons/icon-512x512-white.png'
+    badge = "#{ENV.fetch('democraylist_host', nil)}/icons/icon-512x512-white.png"
     icon = RSpotify::Track.find(track.spotify_id).album.images.last['url']
     user_name = track.user.name
     rspotify_track = RSpotify::Track.find(track.spotify_id)
@@ -53,7 +55,7 @@ class NotificationService
   end
 
   def self.build_new_feature_message(body)
-    badge = ENV.fetch('democraylist_host', nil) + '/icons/icon-512x512-white.png'
+    badge = "#{ENV.fetch('democraylist_host', nil)}/icons/icon-512x512-white.png"
     title = 'Democraylist - NEW FEATURES!'
 
     # Link to song in playlist

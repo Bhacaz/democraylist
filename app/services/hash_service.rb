@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HashService
   class << self
     # def inv_mod(num, mod)

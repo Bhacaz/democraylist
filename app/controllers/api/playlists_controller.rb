@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   class PlaylistsController < ApplicationApiController
     INDEX_EXCLUDED_ATTRIBUTES = %i[tracks tracks_unvoted tracks_archived].freeze
@@ -10,7 +12,7 @@ module Api
     end
 
     def show
-      playlist = Playlist.includes(:subscriptions, tracks: %i[votes user]).find(params[:id])
+      playlist = Playlist.includes(:subscriptions, :user, tracks: %i[votes user]).find(params[:id])
       render json: PlaylistSerializer.new(playlist, params: { auth_user_id: auth_user.id })
     end
 
@@ -29,8 +31,8 @@ module Api
       playlist = Playlist.includes(:subscriptions, tracks: %i[votes user]).find(params[:id])
       playlist.update!(params.require(:playlist).permit(:name, :description, :song_size, :share_setting))
       auth_user.rspotify_user
-      RSpotify::Playlist.find_by_id(playlist.spotify_id).change_details!(**Hashie::Mash.new(name: playlist.name,
-                                                                                            description: playlist.description))
+      RSpotify::Playlist.find_by(id: playlist.spotify_id).change_details!(**Hashie::Mash.new(name: playlist.name,
+                                                                                             description: playlist.description))
 
       render json: PlaylistSerializer.new(playlist, params: { auth_user_id: auth_user.id })
     end
@@ -73,7 +75,7 @@ module Api
     def subscribed
       playlist = Playlist.includes(:subscriptions, tracks: %i[votes user]).find(params[:id])
       Subscription.create! user_id: auth_user.id, playlist_id: playlist.id
-      RSpotify::User.find(auth_user.spotify_id).follow(RSpotify::Playlist.find_by_id(playlist.spotify_id))
+      RSpotify::User.find(auth_user.spotify_id).follow(RSpotify::Playlist.find_by(id: playlist.spotify_id))
       attributes = PlaylistSerializer.attributes_to_serialize.map(&:key) - INDEX_EXCLUDED_ATTRIBUTES
       render json: PlaylistSerializer.new(playlist, fields: attributes, params: { auth_user_id: auth_user.id })
     end
@@ -81,7 +83,7 @@ module Api
     def unsubscribed
       playlist = Playlist.includes(:subscriptions, tracks: %i[votes user]).find(params[:id])
       Subscription.find_by!(user_id: auth_user.id, playlist_id: playlist.id).destroy!
-      RSpotify::User.find(auth_user.spotify_id).unfollow(RSpotify::Playlist.find_by_id(playlist.spotify_id))
+      RSpotify::User.find(auth_user.spotify_id).unfollow(RSpotify::Playlist.find_by(id: playlist.spotify_id))
       attributes = PlaylistSerializer.attributes_to_serialize.map(&:key) - INDEX_EXCLUDED_ATTRIBUTES
       render json: PlaylistSerializer.new(playlist, fields: attributes, params: { auth_user_id: auth_user.id })
     end

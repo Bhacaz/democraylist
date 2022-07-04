@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Playlist do
   describe 'validations' do
     subject { build_stubbed :playlist }

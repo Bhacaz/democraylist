@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Api
   class TracksController < ApplicationApiController
     def search
@@ -7,7 +9,7 @@ module Api
       elsif params[:track_id]
         begin
           render json: RSpotify::Track.find(params[:track_id])
-        rescue StandardError => e
+        rescue StandardError
           render json: :error, status: :not_found
         end
       end

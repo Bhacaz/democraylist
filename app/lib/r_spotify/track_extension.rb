@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RSpotify
   module TrackExtension
     def find(ids, market: nil)
