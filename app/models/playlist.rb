@@ -55,7 +55,6 @@ class Playlist < ApplicationRecord
       RSpotify::Playlist.find_by_id(spotify_id).images.first&.fetch('url') # rubocop:disable Rails/DynamicFindBy
     end
   rescue StandardError
-    update! spotify_id: nil
     nil
   end
 end
