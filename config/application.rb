@@ -34,14 +34,12 @@ module Democraylist
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins '*'
-        resource '*', headers: :any, methods: %i[get put post patch delete options]
-      end
-    end
-
     config.action_dispatch.rescue_responses['AuthorizationException'] = :unauthorized
     config.active_job.queue_adapter = :sidekiq
+
+    config.public_file_server.headers = {
+      'Cache-Control' => "public, max-age=#{1.day.to_i}",
+      'Expires' => 1.day.from_now.to_fs(:rfc822)
+    }
   end
 end
