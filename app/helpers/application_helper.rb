@@ -11,16 +11,22 @@ module ApplicationHelper
         user = User.find(session[:current_user_id])
         return unless user # Return nil if no user is found
 
-        if RSpotify::User.class_variable_defined?(:@@users_credentials)
-          user_credentials = RSpotify::User.class_variable_get(:@@users_credentials)
-          user_credentials[user.spotify_id] ||= {}
-          user_credentials[user.spotify_id]['token'] = session[:access_token]
-        end
+        update_rspotify_users_credentials(user)
         user
       end
   end
 
   def authenticate_request
     head :forbidden if session[:current_user_id].nil? || session[:access_token].nil?
+  end
+
+  private
+
+  def update_rspotify_users_credentials(user)
+    return unless RSpotify::User.class_variable_defined?(:@@users_credentials)
+
+    user_credentials = RSpotify::User.class_variable_get(:@@users_credentials)
+    user_credentials[user.spotify_id] ||= {}
+    user_credentials[user.spotify_id]['token'] = session[:access_token]
   end
 end

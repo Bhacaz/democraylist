@@ -10,3 +10,6 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
+Rails/DynamicFindBy:
+  AllowedReceivers:
+    - RSpotify::Playlist

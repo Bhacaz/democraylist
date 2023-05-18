@@ -51,9 +51,13 @@ class Playlist < ApplicationRecord
   def image_url
     return unless spotify_id
 
-    Rails.cache.fetch("playlist-image_#{spotify_id}", expires_in: 5.minutes) do
-      RSpotify::Playlist.find_by_id(spotify_id).images.first&.fetch('url') # rubocop:disable Rails/DynamicFindBy
-    end
+    image_url = Rails.cache.read("playlist-image_#{spotify_id}")
+
+    return image_url if image_url
+
+    image_url = RSpotify::Playlist.find_by_id(spotify_id).images.first&.fetch('url')
+    Rails.cache.write("playlist-image_#{spotify_id}", image_url, expires_in: 5.minutes)
+    image_url
   rescue StandardError
     nil
   end

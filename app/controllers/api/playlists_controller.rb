@@ -31,8 +31,12 @@ module Api
       playlist = Playlist.includes(:subscriptions, tracks: %i[votes user]).find(params[:id])
       playlist.update!(params.require(:playlist).permit(:name, :description, :song_size, :share_setting))
       auth_user.rspotify_user
-      RSpotify::Playlist.find_by_id(playlist.spotify_id).change_details!(**Hashie::Mash.new(name: playlist.name,
-                                                                                             description: playlist.description))
+      RSpotify::Playlist
+        .find_by_id(playlist.spotify_id)
+        .change_details!(
+          **Hashie::Mash.new(name: playlist.name,
+                             description: playlist.description)
+        )
 
       render json: PlaylistSerializer.new(playlist, params: { auth_user_id: auth_user.id })
     end
