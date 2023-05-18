@@ -23,10 +23,14 @@ module ApplicationHelper
   private
 
   def update_rspotify_users_credentials(user)
-    return unless RSpotify::User.class_variable_defined?(:@@users_credentials)
+    # Set the class variable if it's not defined it can be undefined
+    # if the server was restarted and the user was already logged in
+    unless RSpotify::User.class_variable_defined?(:@@users_credentials)
+      RSpotify::User.class_variable_set(:@@users_credentials, {})
+    end
 
     user_credentials = RSpotify::User.class_variable_get(:@@users_credentials)
     user_credentials[user.spotify_id] ||= {}
-    user_credentials[user.spotify_id]['token'] = session[:access_token]
+    user_credentials[user.spotify_id]['token'] ||= session[:access_token]
   end
 end
