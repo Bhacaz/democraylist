@@ -30,7 +30,7 @@ export class PlaylistSummaryComponent implements OnInit {
       if (this.playlist.subscribed) {
         this.menuItems.push({label: 'Unsubscribed', icon: 'fa-solid fa-heart', command: this.unsubscribed});
       } else {
-        this.menuItems.push({label: 'Subscribed', icon: 'fa-solid fa-heart-o', command: this.subscribed});
+        this.menuItems.push({label: 'Subscribed', icon: 'fa-regular fa-heart', command: this.subscribed});
       }
     }
   }

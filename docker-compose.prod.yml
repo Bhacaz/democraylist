@@ -5,18 +5,23 @@ volumes:
 
 services:
   app:
-    build: .
+    image: ghcr.io/bhacaz/democraylist:latest
     depends_on:
       - postgres
       - redis
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
       REDIS_URL: redis://redis:6379/0
       RAILS_ENV: "production"
       NODE_ENV: "production"
       RAILS_SERVE_STATIC_FILES: "true"
       DB_HOST: "postgres"
+      WEB_CONCURRENCY: "2"
+      RAILS_LOG_TO_STDOUT: enabled
+    env_file:
+      - .env
+    restart: unless-stopped
   postgres:
     image: postgres:14.2-alpine
     volumes:
@@ -25,7 +30,9 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: password
+    restart: unless-stopped
   redis:
     image: redis:6.2-alpine
     ports:
       - "6379:6379"
+    restart: unless-stopped
