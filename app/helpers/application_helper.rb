@@ -13,6 +13,7 @@ module ApplicationHelper
 
         if RSpotify::User.class_variable_defined?(:@@users_credentials)
           user_credentials = RSpotify::User.class_variable_get(:@@users_credentials)
+          user_credentials[user.spotify_id] ||= {}
           user_credentials[user.spotify_id]['token'] = session[:access_token]
         end
         user
