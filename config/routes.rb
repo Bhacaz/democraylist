@@ -54,6 +54,13 @@ Rails.application.routes.draw do
   post '/auth/spotify_get_token', to: 'auth#spotify_get_token'
   post '/auth/logout', to: 'auth#logout'
 
+  # FE v2
+  scope '/turbo' do
+    get 'home' => 'home_turbo#index'
+    get 'playlists' => 'playlists#index'
+    get 'playlists/:id' => 'playlists#show'
+    get 'playlists/:id/edit' => 'playlists#edit'
+  end
   # Handle every other routes to home#index / Angular router
   get '*path', to: 'home#index'
 end

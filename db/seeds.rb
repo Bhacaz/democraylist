@@ -6,3 +6,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+user = User.first
+
+Playlist.create! user_id: user.id, name: 'My first playlist', description: 'This is my first playlist', share_setting: :visible, song_size: 25
+Playlist.create! user_id: user.id, name: 'My second playlist', description: 'This is my second playlist', share_setting: :visible, song_size: 25
+Playlist.create! user_id: user.id, name: 'My third playlist', description: 'This is my third playlist', share_setting: :visible, song_size: 25
+Playlist.create! user_id: user.id, name: 'My fourth playlist', description: 'This is my fourth playlist', share_setting: :visible, song_size: 25
+Playlist.create! user_id: user.id, name: 'My fifth playlist', description: 'This is my fifth playlist', share_setting: :visible, song_size: 25
+Playlist.create! user_id: user.id, name: 'My sixth playlist', description: 'This is my sixth playlist', share_setting: :visible, song_size: 25
+Playlist.create! user_id: user.id, name: 'My seventh playlist', description: 'This is my seventh playlist', share_setting: :visible, song_size: 25
+Playlist.create! user_id: user.id, name: 'My eighth playlist', description: 'This is my eighth playlist', share_setting: :visible, song_size: 25
+Playlist.create! user_id: user.id, name: 'My ninth playlist', description: 'This is my ninth playlist', share_setting: :visible, song_size: 25
+Playlist.create! user_id: user.id, name: 'My tenth playlist', description: 'This is my tenth playlist', share_setting: :visible, song_size: 25
+Playlist.create! user_id: user.id, name: 'My eleventh playlist', description: 'This is my eleventh playlist', share_setting: :visible, song_size: 25
+

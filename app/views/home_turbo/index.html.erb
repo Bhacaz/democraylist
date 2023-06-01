@@ -1,0 +1,7 @@
+<div class="columns", style="width: 100%">
+  <% @playlists.each do |playlist| %>
+    <div class="column">
+      <%= render 'playlists/cover', { playlist: playlist } %>
+    </div>
+  <% end %>
+</div>

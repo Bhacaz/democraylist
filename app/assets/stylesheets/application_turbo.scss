@@ -1,0 +1,71 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+$primary: #FF4E50;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "bulma";
+
+html {
+  font-family: 'Ruboto', sans-serif;
+}
+
+body {
+  padding: 0 1em 1em;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+
+  .column {
+    flex-direction: column;
+  }
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.content-center {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.content-center-content {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.round-image {
+  border-radius: 50%;
+}
+
+//primary #FF4E50
+// secondary #ff0085

@@ -48,7 +48,15 @@ class Playlist < ApplicationRecord
     tracks.where.not(id: Vote.where(track_id: tracks.select(:id), user_id: auth_user_id).select(:track_id))
   end
 
+  DEFAULT_IMAGE_URL = 'https://cdn.icon-icons.com/icons2/2463/PNG/512/playlist_icon_149195.png'
+
   def image_url
+    fetch_image_url || DEFAULT_IMAGE_URL
+  end
+
+  private
+
+  def fetch_image_url
     return unless spotify_id
 
     image_url = Rails.cache.read("playlist-image_#{spotify_id}")
