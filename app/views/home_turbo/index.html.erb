@@ -1,7 +1,6 @@
-<div class="columns", style="width: 100%">
+<%= render 'header' %>
+<div class="is-flex is-flex-wrap-wrap is-justify-content-center">
   <% @playlists.each do |playlist| %>
-    <div class="column">
-      <%= render 'playlists/cover', { playlist: playlist } %>
-    </div>
+    <%= render 'playlists/cover', { playlist: playlist } %>
   <% end %>
 </div>

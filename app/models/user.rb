@@ -13,4 +13,8 @@ class User < ApplicationRecord
                        'credentials' => { 'token' => access_token,
                                           'refresh_token' => refresh_token })
   end
+
+  def image_url
+    RSpotify::User.find(spotify_id).images.first['url']
+  end
 end

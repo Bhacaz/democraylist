@@ -23,17 +23,8 @@ html {
   font-family: 'Ruboto', sans-serif;
 }
 
-body {
-  padding: 0 1em 1em;
-  margin: 0;
-}
-
-.container {
-  display: flex;
-
-  .column {
-    flex-direction: column;
-  }
+.has-primary-gradient-background-color {
+  background-image: linear-gradient(#ff4e50 0%, #f9d423 100%);
 }
 
 .no-margin {

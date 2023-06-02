@@ -5,7 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application_turbo', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag 'turbo/application_turbo', media: 'all', 'data-turbo-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,9 +23,12 @@
     <meta property="og:image" content="https://app.democraylist.com/icons/icon-512x512.png">
     <script async defer data-website-id="f549e8a2-193f-4909-8ce9-d8ab65d5fce0" src="https://umami.bhacaz.com/umami.js"></script>
     <%= javascript_importmap_tags %>
+    <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
 
   <body>
-    <%= yield %>
+    <div>
+      <%= yield %>
+    </div>
   </body>
 </html>
