@@ -1,10 +1,12 @@
 <div class="playlist-cove-tile p-2 ">
-  <div class="box">
-    <div class="block">
-      <%= image_tag playlist.image_url, sizes: '8em' %>
+  <%= link_to "/playlists/#{playlist.id}" do %>
+    <div class="box">
+      <div class="block">
+        <%= image_tag playlist.image_url, sizes: '8em' %>
+      </div>
+      <div class="block">
+        <h6 class="title is-6 playlist-name"><%= playlist.name %></h6>
+      </div>
     </div>
-    <div class="block">
-      <h6 class="title is-6"><%= playlist.name %></h6>
-    </div>
-  </div>
+  <% end %>
 </div>
