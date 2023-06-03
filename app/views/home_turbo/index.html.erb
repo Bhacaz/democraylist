@@ -7,5 +7,5 @@
     <% end %>
   </div>
 
-  <%= render 'menu' %>
+  <%= render 'menu', { menu_title: auth_user.name ,menu_items: @menu_items } %>
 </div>

@@ -3,5 +3,8 @@ class HomeTurboController < ApplicationController
 
   def index
     @playlists = Playlist.all
+    @menu_items = MenuHelper.items(
+      ['logout', 'Logout', auth_logout_path]
+    )
   end
 end

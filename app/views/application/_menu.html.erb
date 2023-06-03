@@ -3,9 +3,17 @@
   <div class="modal-content">
     <div class="box ml-5 mr-5">
       <aside class="menu">
+        <% if defined?(menu_title) && menu_title %>
+          <p class="menu-label">
+            <%= menu_title %>
+          </p>
+        <% end %>
         <ul class="menu-list">
-          <li><a>Dashboard</a></li>
-          <li><a>Customers</a></li>
+          <% menu_items.each do |item| %>
+            <li>
+              <%= item.to_link %>
+            </li>
+          <% end %>
         </ul>
       </aside>
     </div>
