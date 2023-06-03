@@ -13,3 +13,10 @@ Style/Documentation:
 Rails/DynamicFindBy:
   AllowedReceivers:
     - RSpotify::Playlist
+
+Rails/HelperInstanceVariable:
+  Exclude:
+    - 'app/helpers/menu_helper.rb'
+
+Metrics/MethodLength:
+  Max: 20

@@ -50,14 +50,19 @@ class Playlist < ApplicationRecord
     tracks.where.not(id: Vote.where(track_id: tracks.select(:id), user_id: auth_user_id).select(:track_id))
   end
 
-  def self.home_playlists(user)
+  def self.home_playlists(user) # rubocop:disable Metrics/AbcSize
     query = where(user: user)
             .left_joins(:tracks, :subscriptions)
             .or(
               where(id: Playlist.joins(:subscriptions).merge(Subscription.where(user: user)).select(:id))
             )
             .group('playlists.id')
-            .pluck('playlists.id', 'playlists.created_at', 'MAX(tracks.created_at) as max_track_created_at', 'MAX(subscriptions.created_at) as max_subscription_created_at')
+            .pluck(
+              'playlists.id',
+              'playlists.created_at',
+              'MAX(tracks.created_at) as max_track_created_at',
+              'MAX(subscriptions.created_at) as max_subscription_created_at'
+            )
 
     query = query.sort_by do |_playlist_id, playlist_created_at, max_track_created_at, max_subscription_created_at|
       -[playlist_created_at.to_i, max_track_created_at.to_i, max_subscription_created_at.to_i].compact.max

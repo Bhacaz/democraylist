@@ -10,6 +10,7 @@ module MenuHelper
   class Item
     include ActionView::Helpers::UrlHelper
     attr_reader :identifier, :label, :link
+
     def initialize(identifier, label, link)
       @identifier = identifier
       @label = label

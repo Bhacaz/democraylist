@@ -15,9 +15,9 @@ gem 'sass-rails', '>= 6'
 gem 'importmap-rails'
 gem 'webpacker', '~> 4.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
+gem 'stimulus-rails'
 gem 'turbolinks', '~> 5'
 gem 'turbo-rails'
-gem 'stimulus-rails'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
@@ -42,6 +42,7 @@ end
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'active_record_query_trace'
+  gem 'hotwire-livereload', '~> 1.2'
   gem 'listen'
   gem 'rack-mini-profiler'
   gem 'rubocop'
@@ -49,7 +50,6 @@ group :development do
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'web-console', '>= 3.3.0'
-  gem "hotwire-livereload", "~> 1.2"
 end
 
 group :production do
@@ -74,4 +74,4 @@ group :test do
   gem 'rspec-rails'
 end
 
-gem "bulma-rails", "~> 0.9.4"
+gem 'bulma-rails', '~> 0.9.4'
