@@ -18,8 +18,6 @@ gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 gem 'turbo-rails'
 gem 'stimulus-rails'
-gem 'rails_material_design_icons'
-
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
