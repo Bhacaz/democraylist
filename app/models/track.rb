@@ -3,6 +3,7 @@
 class Track < ApplicationRecord
   belongs_to :playlist
   belongs_to :user, foreign_key: :added_by_id, inverse_of: :tracks
+  belongs_to :added_by, class_name: 'User', inverse_of: :added_tracks
   has_many :votes, dependent: :destroy
 
   validates :spotify_id, uniqueness: { scope: :playlist_id }

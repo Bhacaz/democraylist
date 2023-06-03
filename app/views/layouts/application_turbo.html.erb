@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Democraylist</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'turbo/application_turbo', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbo-track': 'reload' %>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/icon-96x96.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+    <meta name="theme-color" content="#FF4E50">
+    <meta name="theme-color" content="#FF4E50">
+    <meta property="og:title"  content="Democraylist - Spotify collaborative playlist.">
+    <meta property="og:description"  content="Create a playlist, invite friends and vote to build the best collaborative playlist.">
+    <meta property="og:image" content="https://app.democraylist.com/icons/icon-512x512.png">
+    <% if Rails.env.production? %>
+      <script async defer data-website-id="f549e8a2-193f-4909-8ce9-d8ab65d5fce0" src="https://umami.bhacaz.com/umami.js"></script>
+    <% end %>
+    <%= javascript_importmap_tags %>
+    <%= hotwire_livereload_tags if Rails.env.development? %>
+  </head>
+
+  <body>
+    <div>
+      <%= yield %>
+    </div>
+  </body>
+</html>

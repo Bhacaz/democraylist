@@ -1,14 +1,13 @@
 
-<% @playlist.each do |playlist| %>
+<% @playlists.each do |playlist| %>
 
   <div style="display: flex; height: 6em; margin-bottom: 2em">
     <div>
-      <img src="<%= playlist.images.first&.dig('url') %>" style="height: 6em; padding-right: 1em">
+      <img src="<%= playlist.image_url %>" style="height: 6em; padding-right: 1em">
     </div>
     <div>
       <h2><%= playlist.name %></h2>
-      <p><%= "(#{playlist.total}) #{playlist.description}" %></p>
+      <p><%= "(0) #{playlist.description}" %></p>
     </div>
   </div>
-
 <% end %>

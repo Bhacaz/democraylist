@@ -10,29 +10,21 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require_tree .
  *= require_self
  */
 
-@import "primeng/resources/themes/nova/theme.css";
-@import "primeng/resources/primeng.min.css";
+$primary: #FF4E50;
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "bulma";
 
 html {
   font-family: 'Ruboto', sans-serif;
 }
 
-body {
-  padding: 0 1em 1em;
-  margin: 0;
-}
-
-.container {
-  display: flex;
-
-  .column {
-    flex-direction: column;
-  }
+.has-primary-gradient-background-color {
+  background-image: linear-gradient(#ff4e50 0%, #f9d423 100%);
 }
 
 .no-margin {

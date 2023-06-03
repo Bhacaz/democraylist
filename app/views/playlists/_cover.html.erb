@@ -1,0 +1,12 @@
+<div class="playlist-cove-tile p-2" id=<%= dom_id(playlist, 'cover') %>>
+  <%= link_to "/playlists/#{playlist.id}", data: { turbo: false } do %>
+    <div class="box">
+      <div class="block">
+        <%= image_tag playlist.image_url, sizes: '8em', loading: 'lazy' %>
+      </div>
+      <div class="block">
+        <h6 class="title is-6 playlist-name"><%= playlist.name %></h6>
+      </div>
+    </div>
+  <% end %>
+</div>

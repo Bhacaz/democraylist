@@ -1,0 +1,21 @@
+<div class="modal has-text-centered" id="modal-menu">
+  <div class="modal-background" data-action="click->home#toggleMenu"></div>
+  <div class="modal-content">
+    <div class="box ml-5 mr-5">
+      <aside class="menu">
+        <% if defined?(menu_title) && menu_title %>
+          <p class="menu-label">
+            <%= menu_title %>
+          </p>
+        <% end %>
+        <ul class="menu-list">
+          <% menu_items.each do |item| %>
+            <li>
+              <%= item.to_link %>
+            </li>
+          <% end %>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</div>

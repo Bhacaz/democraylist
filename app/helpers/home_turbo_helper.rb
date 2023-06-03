@@ -1,0 +1,2 @@
+module HomeTurboHelper
+end

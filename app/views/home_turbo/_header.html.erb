@@ -1,0 +1,16 @@
+<nav class="level is-mobile p-4 has-primary-gradient-background-color">
+  <div class="level-left">
+    <div class="level-item">
+      <%= image_tag '/icons/icon-512x512-white.png', size: '36' %>
+      <h1 class="title is-5 has-text-white ml-2">Democraylist</h1>
+    </div>
+  </div>
+
+  <div class="level-right">
+    <div class="level-item">
+      <%= content_tag 'a', data: { action: 'home#toggleMenu' } do %>
+        <%= image_tag auth_user.image_url, class: 'round-image', size: '36' %>
+      <% end %>
+    </div>
+  </div>
+</nav>

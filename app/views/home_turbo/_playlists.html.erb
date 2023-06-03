@@ -1,0 +1,7 @@
+<%= turbo_frame_tag "playlists" do %>
+  <div class="is-flex is-flex-wrap-wrap is-justify-content-center">
+    <% @playlists.each do |playlist| %>
+      <%= render 'playlists/cover', { playlist: playlist } %>
+    <% end %>
+  </div>
+<% end %>
