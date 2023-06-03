@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :tracks, foreign_key: :added_by_id, dependent: :destroy, inverse_of: :user
   has_many :push_notif_preferences, dependent: :destroy
+  has_many :added_tracks, class_name: 'Track', foreign_key: :added_by_id, inverse_of: :added_by
   validates :spotify_id, presence: true, uniqueness: true
 
   def rspotify_user

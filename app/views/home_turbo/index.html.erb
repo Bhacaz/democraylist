@@ -1,18 +1,26 @@
+<style>
+  #search-input {
+      max-width: 30em;
+  }
+</style>
+
 
 <div data-controller="home">
-  <%= render 'header' %>
-  <%= form_with(url: home_path, method: "GET", data: { controller: "input-submission", turbo_frame: "playlists" }) do |form| %>
-    <div class="field pl-6 pr-6">
-      <p class="control has-icons-left">
-        <%= form.text_field :query, data: { action: "input->input-submission#search" }, class: "input is-rounded", placeholder: 'Search' %>
-        <span class="icon is-small is-left">
-        <%= mdi 'magnify' %>
-      </span>
-      </p>
-    </div>
-  <% end %>
+  <div class="has-text-centered">
+    <%= render 'header' %>
+    <%= form_with(url: home_path, method: "GET", data: { controller: "input-submission", turbo_frame: "playlists" }) do |form| %>
+      <div class="field pl-6 pr-6">
+        <p class="control has-icons-left">
+          <%= form.text_field :query, data: { action: "input->input-submission#search" }, class: "input is-rounded", id: "search-input", placeholder: 'Search' %>
+          <span class="icon is-small is-left">
+          <%= mdi 'magnify' %>
+        </span>
+        </p>
+      </div>
+    <% end %>
 
-  <%= render 'playlists' %>
+    <%= render 'playlists' %>
 
-  <%= render 'menu', { menu_title: auth_user.name ,menu_items: @menu_items } %>
+    <%= render 'menu', { menu_title: auth_user.name ,menu_items: @menu_items } %>
+  </div>
 </div>

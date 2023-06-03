@@ -6,9 +6,9 @@ class HomeTurboController < ApplicationController
   def index
     @playlists =
       if params[:query].present?
-        Playlist.where('name LIKE ?', "%#{params[:query]}%")
+        Playlist.home_playlists(auth_user).where('name LIKE ?', "%#{params[:query]}%")
       else
-        Playlist.all
+        Playlist.home_playlists(auth_user)
       end
     @menu_items = MenuHelper.items(
       ['logout', 'Logout', auth_logout_path]
