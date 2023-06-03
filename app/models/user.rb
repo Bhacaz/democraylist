@@ -15,6 +15,9 @@ class User < ApplicationRecord
   end
 
   def image_url
-    RSpotify::User.find(spotify_id).images.first['url']
+    digest_access_token = ActiveSupport::Digest.hexdigest(access_token)
+    Rails.cache.fetch("user/#{digest_access_token}/image_url", expires_in: 1.day) do
+      RSpotify::User.find(spotify_id).images.first['url']
+    end
   end
 end
