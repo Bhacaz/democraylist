@@ -49,6 +49,7 @@ group :development do
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'web-console', '>= 3.3.0'
+  gem "hotwire-livereload", "~> 1.2"
 end
 
 group :production do
@@ -74,5 +75,3 @@ group :test do
 end
 
 gem "bulma-rails", "~> 0.9.4"
-
-gem "hotwire-livereload", "~> 1.2"
