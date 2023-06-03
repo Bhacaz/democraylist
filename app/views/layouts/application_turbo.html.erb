@@ -21,7 +21,9 @@
     <meta property="og:title"  content="Democraylist - Spotify collaborative playlist.">
     <meta property="og:description"  content="Create a playlist, invite friends and vote to build the best collaborative playlist.">
     <meta property="og:image" content="https://app.democraylist.com/icons/icon-512x512.png">
-    <script async defer data-website-id="f549e8a2-193f-4909-8ce9-d8ab65d5fce0" src="https://umami.bhacaz.com/umami.js"></script>
+    <% if Rails.env.production? %>
+      <script async defer data-website-id="f549e8a2-193f-4909-8ce9-d8ab65d5fce0" src="https://umami.bhacaz.com/umami.js"></script>
+    <% end %>
     <%= javascript_importmap_tags %>
     <%= hotwire_livereload_tags if Rails.env.development? %>
   </head>
