@@ -60,14 +60,21 @@ class Playlist < ApplicationRecord
             .pluck(
               'playlists.id',
               'playlists.created_at',
-              'MAX(tracks.created_at) as max_track_created_at',
-              'MAX(subscriptions.created_at) as max_subscription_created_at'
+              'MAX(tracks.created_at)',
+              'MAX(subscriptions.created_at)'
             )
+
+    query.each do |list|
+      list.map! do |item|
+        item.is_a?(String) ? Time.zone.parse(item) : item
+      end
+    end
 
     query = query.sort_by do |_playlist_id, playlist_created_at, max_track_created_at, max_subscription_created_at|
       -[playlist_created_at.to_i, max_track_created_at.to_i, max_subscription_created_at.to_i].compact.max
     end
-    where(id: query.map(&:first))
+    ids_ordered = query.map(&:first)
+    where(id: ids_ordered).sort_by { |playlist| ids_ordered.index(playlist.id) }
   end
 
   def image_url
