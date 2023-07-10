@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class HomeTurboController < ApplicationController
-  layout 'application_turbo'
-
+class HomeTurboController < ApplicationTurboController
   def index
     @playlists =
       if params[:query].present?
