@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def authenticate_request
-    head :forbidden if session[:current_user_id].nil? || session[:access_token].nil?
+    head :forbidden unless authenticated?
   end
 
   private
@@ -32,5 +32,9 @@ module ApplicationHelper
     user_credentials = RSpotify::User.class_variable_get(:@@users_credentials)
     user_credentials[user.spotify_id] ||= {}
     user_credentials[user.spotify_id]['token'] ||= session[:access_token]
+  end
+
+  def authenticated?
+    session[:current_user_id] && session[:access_token]
   end
 end

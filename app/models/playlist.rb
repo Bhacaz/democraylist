@@ -50,7 +50,7 @@ class Playlist < ApplicationRecord
     tracks.where.not(id: Vote.where(track_id: tracks.select(:id), user_id: auth_user_id).select(:track_id))
   end
 
-  def self.home_playlists(user) # rubocop:disable Metrics/AbcSize
+  def self.home_playlists(user, search: nil) # rubocop:disable Metrics/AbcSize
     query = where(user: user)
             .left_joins(:tracks, :subscriptions)
             .or(
@@ -74,7 +74,9 @@ class Playlist < ApplicationRecord
       -[playlist_created_at.to_i, max_track_created_at.to_i, max_subscription_created_at.to_i].compact.max
     end
     ids_ordered = query.map(&:first)
-    where(id: ids_ordered).sort_by { |playlist| ids_ordered.index(playlist.id) }
+    query = where(id: ids_ordered)
+    query = query.where('name LIKE ?', "%#{search}%") if search.present?
+    query.sort_by { |playlist| ids_ordered.index(playlist.id) }
   end
 
   def image_url
