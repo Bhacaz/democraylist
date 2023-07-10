@@ -3,9 +3,7 @@
 class HomeTurboController < ApplicationTurboController
   def index
     @playlists = Playlist.home_playlists(auth_user, search: params[:query])
-    @menu_items = MenuHelper.items(
-      ['logout', 'Logout', auth_logout_path]
-    )
+    @menu_items =
 
     respond_to do |format|
       format.html do |variant|

@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   get '/auth/user', to: 'auth#user'
   get '/auth/refresh_access_token', to: 'auth#refresh_access_token'
   post '/auth/spotify_get_token', to: 'auth#spotify_get_token'
-  post '/auth/logout', to: 'auth#logout'
+  match '/auth/logout', to: 'auth#logout', via: %i[get post]
 
   # FE v2
   scope '/turbo' do

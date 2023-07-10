@@ -11,7 +11,12 @@ class AuthController < ApplicationApiController
     User.find(auth_user.id).update! access_token: nil, expires_at: nil, refresh_token: nil
     session[:current_user_id] = nil
     session[:access_token] = nil
-    render json: :ok
+    # POST comes from angular app
+    if request.method == 'POST'
+      render json: :ok
+    else
+      redirect_to '/login'
+    end
   end
 
   def spotify_login_url
