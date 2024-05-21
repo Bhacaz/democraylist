@@ -7,6 +7,7 @@ class Playlist < ApplicationRecord
   enum share_setting: { visible: 0, with_link: 1, restricted: 2 }
 
   validates :name, presence: true
+  validates :spotify_id, uniqueness: true, presence: true
   has_many :tracks, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
 

@@ -17,10 +17,9 @@ module Api
     end
 
     def create
-      new_playlist = Playlist.create! user_id: auth_user.id, **playlist_params
       spotify_playlist = RSpotify::User.find(auth_user.spotify_id).create_playlist!(playlist_params[:name], public: true,
                                                                                                             description: playlist_params[:description])
-      new_playlist.update! spotify_id: spotify_playlist.id
+      new_playlist = Playlist.create! user_id: auth_user.id, spotify_id: spotify_playlist.id, **playlist_params
 
       playlist = Playlist.includes(:subscriptions, tracks: %i[votes user]).find(new_playlist.id)
 
@@ -196,7 +195,7 @@ module Api
     private
 
     def playlist_params
-      params.require(:playlist).permit(:user_id, :name, :description, :song_size)
+      params.require(:playlist).permit(:user_id, :name, :description, :song_size, :share_setting)
     end
   end
 end
