@@ -7,10 +7,12 @@
   </div>
 
   <div class="level-right">
-    <div class="level-item">
-      <%= content_tag 'a', data: { action: 'home#toggleMenu' } do %>
-        <%= image_tag auth_user.image_url, class: 'round-image', size: '36' %>
-      <% end %>
-    </div>
+    <% if auth_user&.image_url %>
+      <div class="level-item">
+        <%= content_tag 'a', data: { action: 'home#toggleMenu' } do %>
+          <%= image_tag auth_user.image_url, class: 'round-image', size: '36' %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </nav>
