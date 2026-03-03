@@ -8,6 +8,9 @@
 
 ### Build the perfect playlist with the help of others.
 
+<img width="337" height="532" alt="image" src="https://github.com/user-attachments/assets/7ea0d98f-45f5-4499-8138-973306bee33c" />
+
+
 ## How it works
 
 1. Create a playlist in [Democraylist](https://app.democraylist.com)
